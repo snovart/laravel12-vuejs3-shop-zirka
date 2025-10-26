@@ -6,8 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}"><!-- CSRF for AJAX/forms -->
     <title>@yield('title')</title>
 
-    {{-- Vite CSS (JS will be added in the next step) --}}
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/front/app.js'])
 </head>
 <body>
     {{-- Header (empty for now) --}}
