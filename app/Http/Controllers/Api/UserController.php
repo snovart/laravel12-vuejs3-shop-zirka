@@ -13,44 +13,44 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
 
         $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
+            'name'     => $validated['name'],
+            'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'customer',
+            'role'     => 'customer',
         ]);
 
         Auth::login($user);
-        $request->session()->regenerate(); // <- ключевой момент
+        $request->session()->regenerate();
 
         return response()->json([
-            'message' => 'Registration successful',
-            'user' => $user,
+            'message' => __('auth.registration_success'),
+            'user'    => $user,
         ]);
     }
 
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required|string',
         ]);
 
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+        if (! Auth::attempt($credentials)) {
+            return response()->json(['message' => __('auth.failed')], 422);
         }
 
-        $request->session()->regenerate(); // <- ключевой момент
+        $request->session()->regenerate();
         $user = Auth::user();
 
         return response()->json([
-            'message' => 'Login successful',
-            'user' => $user,
+            'message' => __('auth.login_success'),
+            'user'    => $user,
         ]);
     }
 
@@ -60,6 +60,8 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json(['message' => 'Logout successful']);
+        return response()->json([
+            'message' => __('auth.logout_success'),
+        ]);
     }
 }

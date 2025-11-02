@@ -4,6 +4,7 @@
 import { useAuthStore } from '@front/store/auth'
 import { apiAuthMe, apiLogin, apiRegister, apiLogout } from '@front/api/auth'
 import { ensureCsrfCookie } from '@front/api/http' // get Sanctum CSRF cookie before stateful requests
+import { AUTH_MESSAGES } from '@front/constants/authConstants' // centralized UI text constants
 
 export function useAuth(http) {
   const store = useAuthStore()
@@ -30,7 +31,7 @@ export function useAuth(http) {
       store.user = data.user || null
       return data
     } catch (e) {
-      store.error = e?.response?.data?.message || 'Ошибка входа'
+      store.error = e?.response?.data?.message || AUTH_MESSAGES.LOGIN_ERROR
       throw e
     } finally {
       store.loading = false
@@ -51,7 +52,7 @@ export function useAuth(http) {
       store.user = data.user || null
       return data
     } catch (e) {
-      store.error = e?.response?.data?.message || 'Ошибка регистрации'
+      store.error = e?.response?.data?.message || AUTH_MESSAGES.REGISTER_ERROR
       throw e
     } finally {
       store.loading = false
@@ -71,7 +72,7 @@ export function useAuth(http) {
       await apiLogout(http)
       store.user = null
     } catch (e) {
-      store.error = e?.response?.data?.message || 'Ошибка выхода'
+      store.error = e?.response?.data?.message || AUTH_MESSAGES.LOGOUT_ERROR
       throw e
     } finally {
       store.loading = false
