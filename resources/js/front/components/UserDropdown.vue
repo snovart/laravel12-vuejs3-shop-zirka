@@ -1,6 +1,7 @@
 <!-- resources/js/front/components/UserDropdown.vue -->
 <template>
-  <div ref="menuEl" class="absolute right-4 top-14 z-50">
+  <!-- positioned relative to #user-dd-anchor -->
+  <div ref="menuEl" class="absolute right-0 top-full mt-3 z-50">
     <div class="w-48 rounded-md bg-white shadow-xl ring-1 ring-black/5">
       <ul class="py-2 text-sm text-gray-700">
         <li>
@@ -27,7 +28,7 @@
 </template>
 
 <script setup>
-// Dropdown that uses useAuth(http) for logout
+// Dropdown driven from app.js; here we only handle outside click to self-close
 import { computed, inject, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useAuth } from '@front/composables/useAuth'
 
@@ -50,7 +51,6 @@ onBeforeUnmount(() => document.removeEventListener('click', handleOutside))
 async function onLogout() {
   await logout()
   emit('close')
-  // Optional: hard refresh to sync any Blade-only UI
   window.location.href = '/'
 }
 </script>

@@ -9,3 +9,5 @@ Route::middleware('auth.custom')->group(function () {
     Route::view('/profile', 'front.profile')->name('front.profile');
     Route::view('/orders', 'front.orders')->name('front.orders');
 });
+
+Route::get('/search', [\App\Http\Controllers\Front\SearchController::class, 'index'])->name('front.search');

@@ -17,3 +17,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Header dropdown hover fix */
+.header-category:hover .header-submenu {
+  visibility: visible;
+  opacity: 1;
+}
+.header-submenu {
+  @apply absolute left-0 top-full bg-white shadow-lg min-w-[200px] z-20 invisible opacity-0 transition-opacity duration-150;
+}
