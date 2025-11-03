@@ -1,0 +1,42 @@
+/* Header dropdown hover fix */
+.header-category:hover .header-submenu {
+  visibility: visible;
+  opacity: 1;
+}
+.header-submenu {
+  @apply absolute left-0 top-full bg-white shadow-lg min-w-[200px] z-20 invisible opacity-0 transition-opacity duration-150;
+}
+
+/* resources/css/custom.css */
+
+/* ≤1420px — немного сужаем отступы */
+@media (max-width: 1420px) {
+  .topbar {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* ≤1024px — перестраиваем в колонку */
+@media (max-width: 1024px) {
+  .topbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .topbar img {
+    height: 3rem;
+  }
+
+  .topbar a[href^="tel:"] {
+    font-size: 1rem;
+  }
+}
+
+/* ≤640px — телефон скрываем, оставляем только иконки */
+@media (max-width: 640px) {
+  .topbar a[href^="tel:"] {
+    display: none;
+  }
+}
