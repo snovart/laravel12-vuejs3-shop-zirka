@@ -5,7 +5,9 @@
     <span class="sr-only">zirka jewelry</span>
   </a>
   <div class="flex items-center gap-6 text-brand.text">
-    <a href="tel:+380961589680" class="hover:text-gray-900">+38 096 158 96 80</a>
+    <a href="tel:{{ config('contacts.phone_link') }}" class="hover:text-gray-900">
+        {{ config('contacts.phone') }}
+    </a>
     <a href="https://t.me/wTEG4ljt43BmOGNi" target="_blank" class="w-10 h-10 rounded-full bg-brand.lavender flex items-center justify-center hover:bg-brand.lavenderDark">
       <x-icon.telegram />
     </a>
